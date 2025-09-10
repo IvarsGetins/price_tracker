@@ -4,8 +4,6 @@ import re
 import os
 # These values will be passed from GitHub Secrets
 
-TELEGRAM_BOT_TOKEN = '8331146519:AAFpaXPXStLfEaCJA5OOh5R8k44Gy39vS5Q'
-TELEGRAM_CHAT_ID = '6024675870'
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
 
