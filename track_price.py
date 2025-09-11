@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import os
+import datetime
 # These values will be passed from GitHub Secrets
 
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
@@ -56,11 +57,13 @@ if match:
     
     # Clean up the space to get the final number
     final_number = int(number_part.replace(' ', ''))
-    print(final_number)
 else:
     print("No number found.")
 
-if final_number < 3300:
+day_ = datetime.date.today().weekday() == 3
+    
+
+if final_number < 3200 or day_:
     alert_message = f"Zema cena:\n{current_price}"
     send_telegram_message(alert_message)
 else:
