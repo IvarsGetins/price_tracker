@@ -66,6 +66,3 @@ day_ = datetime.date.today().weekday() == 3
 if final_number < 3200 or day_:
     alert_message = f"Zema cena:\n{current_price}"
     send_telegram_message(alert_message)
-else:
-    send_telegram_message("Error: Could not retrieve price from the website.")
-
