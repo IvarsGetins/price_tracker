@@ -65,23 +65,24 @@ def send_telegram_message(message):
 rd = get_priceRD()
 current_price = get_price()
 
-match = re.search(r'[\d\s]+', current_price)
-match_rd = re.search(r'[\d\s]+', rd)
-if match:
-    # Get the matched part
-    number_part = match.group(0).strip()
-    # Clean up the space to get the final number
-    final_number = int(number_part.replace(' ', ''))
 
-if match_rd:
-    # Get the matched part
-    number_part_rd = match_rd.group(0).strip()
-    # Clean up the space to get the final number
-    final_number_rd = int(number_part_rd.replace(' ', ''))
+# match = re.search(r'[\d\s]+', current_price)
+# match_rd = re.search(r'[\d\s]+', rd)
+# if match:
+#     # Get the matched part
+#     number_part = match.group(0).strip()
+#     # Clean up the space to get the final number
+#     final_number = int(number_part.replace(' ', ''))
+
+# if match_rd:
+#     # Get the matched part
+#     number_part_rd = match_rd.group(0).strip()
+#     # Clean up the space to get the final number
+#     final_number_rd = int(number_part_rd.replace(' ', ''))
 
 
 
-day_ = datetime.date.today().weekday() == 3
+# day_ = datetime.date.today().weekday() == 3
     
 
 send_telegram_message(f"Gintara:{current_price}\nRD: {rd}")
