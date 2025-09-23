@@ -1,12 +1,8 @@
 name: Price Tracker
 
-# Controls when the workflow will run
 on:
-  # Schedule the job to run every day at 12:00 PM UTC
   schedule:
     - cron: '0 12 * * *'
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -25,6 +21,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
+
+      # Install Playwright browsers
+      - name: Install Playwright browsers
+        run: |
+          playwright install --with-deps
 
       - name: Run price tracker script
         env:
