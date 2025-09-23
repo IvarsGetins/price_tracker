@@ -72,7 +72,7 @@ def send_telegram_message(message):
 rd = get_priceRD()
 current_price = get_price()
 
-
+print(rd, current_price)
 # match = re.search(r'[\d\s]+', current_price)
 # match_rd = re.search(r'[\d\s]+', rd)
 # if match:
