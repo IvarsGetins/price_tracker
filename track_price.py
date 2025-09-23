@@ -5,6 +5,8 @@ import re
 import os
 import datetime
 from urllib.parse import quote
+from playwright.sync_api import sync_playwright
+
 # These values will be passed from GitHub Secrets
 
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
@@ -33,23 +35,21 @@ def get_price():
 
 
 def get_priceRD():
-    """Scrapes the website for the price."""
+    """Scrapes RD site for the price using Playwright (bypasses Cloudflare)."""
     try:
-        response = requests.get(RD_URL, headers=HEADERS)
-        soup = BeautifulSoup(response.content, 'html.parser')
-        price_element = soup.find('span', itemprop='price', class_='price') # Update this line!
-
-        if not price_element:
-            print("DEBUG: Price element not found.")
-            print(response.text[:1000])  # first 1000 chars of response
-            return None
-
-        if price_element:
-            return price_element.text.strip()
-        else:
-            return None
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
+            page.goto(RD_URL, timeout=60000)
+            page.wait_for_selector("span.price[itemprop=price]", timeout=15000)
+            price_element = page.query_selector("span.price[itemprop=price]")
+            if price_element:
+                return price_element.inner_text().strip()
+            else:
+                print("Price element not found on RD page")
+                return None
     except Exception as e:
-        print(f"Error scraping price: {e}")
+        print(f"Error scraping RD price: {e}")
         return None
 
 
