@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -37,6 +38,12 @@ def get_priceRD():
         response = requests.get(RD_URL, headers=HEADERS)
         soup = BeautifulSoup(response.content, 'html.parser')
         price_element = soup.find('span', itemprop='price', class_='price') # Update this line!
+
+        if not price_element:
+            print("DEBUG: Price element not found.")
+            print(response.text[:1000])  # first 1000 chars of response
+            return None
+
         if price_element:
             return price_element.text.strip()
         else:
