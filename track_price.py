@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import os
 import datetime
+from urllib.parse import quote
 # These values will be passed from GitHub Secrets
 
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
@@ -10,8 +11,7 @@ TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
 
 # The URL of the product page to track
 URL = 'https://www.gitana.lv/darza-tehnika/zaliena-roboti/zaliena-robots-segway-navimow-x330e?search_query=navimow+330'
-RD_URL = 'https://www.rdveikals.lv/products/lv/1935/819719/sort/5/filter/0_0_0_0/Navimow-X330E-Robots-z%C4%81les-p%C4%BC%C4%81v%C4%93js.html'
-
+RD_URL = 'https://www.rdveikals.lv/products/lv/1935/819719/sort/5/filter/0_0_0_0/Navimow-X330E-Robots-' + quote("zāles-pļāvējs.html")
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 }
